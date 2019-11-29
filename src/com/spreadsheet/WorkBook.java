@@ -43,18 +43,16 @@ private List<SpreadSheet> workBook;
 	}
 	
 	public String remove(int index) {
-		String name = "";
-		if(index < this.workBook.size()) {
+		
+		if(index < this.workBook.size() && index >= 0) {
 			if(this.workBook.contains(this.workBook.get(index))) {
-				name = this.workBook.get(index).getSpreadSheetName();
-				this.workBook.remove(index);
-				return name;
+				return this.workBook.remove(index).getSpreadSheetName();
 			}
-			
 		}		
 		return null;
 	}
-
+	
+	//Incompelete Method
 	public int move(String from, String to, boolean before) {
 		int fromIndex = 0;
 		int toIndex = 0;
@@ -69,6 +67,64 @@ private List<SpreadSheet> workBook;
 			
 		}
 		return -1;
+	}
+	
+	//Incompelete Method
+	public String move(int from, int to, boolean before) {
+		
+		
+		return null;
+	}
+	
+	public String moveToEnd(int from) {
+		
+		if(from < this.workBook.size() && from >= 0) {
+			SpreadSheet sheet = this.workBook.remove(from);
+			this.workBook.add(sheet);
+			return sheet.getSpreadSheetName();
+		}	
+		return null;
+	}
+	
+	public int moveToEnd(String from) {
+		
+		for(SpreadSheet sheet : this.workBook) {
+			if(sheet.getSpreadSheetName() == from) {
+				int index = this.workBook.indexOf(sheet);
+				SpreadSheet _sheet = this.workBook.remove(index);
+				this.workBook.add(_sheet);
+				return index;
+			}
+		}
+		return -1;
+	}
+	
+	public int rename(String currentName, String newName) {
+		
+		for(SpreadSheet sheet : this.workBook) {
+			if(sheet.getSpreadSheetName() == currentName) {
+				sheet.setSpreadSheetName(newName);
+				return this.workBook.indexOf(sheet);
+			}
+		}
+		
+		return -1;
+	}
+	
+	public int index(String sheetName) {
+		for(SpreadSheet sheet : this.workBook) {
+			if(sheet.getSpreadSheetName() == sheetName) {
+				return this.workBook.indexOf(sheet);
+			}
+		}
+		return -1;
+	}
+	
+	public String sheetName(int index) {
+		if(index < this.workBook.size() && index >=0) {
+			return this.workBook.get(index).getSpreadSheetName();
+		}
+		return null;
 	}
 	
 	public int length() {
