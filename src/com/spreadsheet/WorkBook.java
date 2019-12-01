@@ -128,7 +128,7 @@ public class WorkBook {
 		}
 		return this.workBook.indexOf(fromSheet);*/
 		SpreadSheet sp = this.moveSheetsInList(fromIndex, toIndex, before);
-		return sp == null ? null :this.workBook.indexOf(sp);
+		return sp == null ? -1 :this.workBook.indexOf(sp);
 	}
 	
 	//Completed Method
