@@ -18,5 +18,10 @@ public class SpreadSheet {
 		this.spreadSheetName = spreadSheetName;
 	}
 	
+	public String toString() {
+		
+		return this.spreadSheetName;
+	}
+	
 
 }
