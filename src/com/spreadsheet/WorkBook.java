@@ -16,29 +16,9 @@ public class WorkBook {
 		this.workBook.add(new SpreadSheet("Sheet1"));
 		this.workBook.add(new SpreadSheet("Sheet2"));
 		this.workBook.add(new SpreadSheet("Sheet3"));
-		this.workBook.add(new SpreadSheet("Sheet4"));
-		this.spreadSheetCount = 4;
+		this.spreadSheetCount = 3;
 		this.sheetLimit = 256;
 	}
-	/*
-	public boolean add(SpreadSheet spreadSheet) {
-		
-		boolean retVal = false;
-		for (SpreadSheet sheet : this.workBook ) {
-			if(sheet.getSpreadSheetName() == spreadSheet.getSpreadSheetName()) {
-				retVal = false;
-				//return retVal;
-				break;
-			}else {
-				this.workBook.add(spreadSheet);
-				retVal = true;
-				//return retVal;
-				break;
-			}
-		}
-		return retVal;
-	}
-	*/
 	
 	public boolean add() {
 		
@@ -46,21 +26,20 @@ public class WorkBook {
 			return false;
 		
 		this.spreadSheetCount++;
-		String s = "Sheet"+this.spreadSheetCount + "";
+		String s = "Sheet"+this.spreadSheetCount;
 		this.workBook.add(new SpreadSheet(s));
 		
 		return true;
 	}
 	
 	
-	//Modified
 	public int remove(String sheetName) {
 
 		if(this.workBook.size() == 1)
 			return -1;
 		
 		for (SpreadSheet sheet : this.workBook) {
-			if(sheet.getSpreadSheetName() == sheetName) {
+			if(sheet.getSpreadSheetName().equalsIgnoreCase(sheetName)) {
 				int index = this.workBook.indexOf(sheet);
 				this.workBook.remove(sheet);
 				return index;
@@ -68,22 +47,19 @@ public class WorkBook {
 		}
 		return -1;
 	}
-	//Modified
+	
 	public String remove(int index) {
 		
 		if(this.workBook.size() == 1)
 			return null;
 		
 		if(index < this.workBook.size() && index >= 0) {
-			System.out.println("Index");
-			//if(this.workBook.contains(this.workBook.get(index))) {
+	
 				return this.workBook.remove(index).getSpreadSheetName();
-			//}
 		}		
 		return null;
 	}
 	
-	//Method Completed
 	public int move(String from, String to, boolean before) {
 		if(from.equalsIgnoreCase(to))return -1;
 		
@@ -100,39 +76,12 @@ public class WorkBook {
 			}
 		}
 		
-		/*
-		if(fromIndex == -1 || toIndex == -1) return -1;
-		
-		SpreadSheet fromSheet = this.workBook.get(fromIndex);
-		if(before) {
-			if(toIndex == 0) {
-				this.workBook.remove(fromIndex);
-				this.workBook.add(0,fromSheet);
-			}else {
-				this.workBook.add(toIndex, fromSheet);
-				if(fromIndex < toIndex) {
-					this.workBook.remove(fromIndex);
-				}else {
-					this.workBook.remove(fromIndex + 1);
-				}
-				
-			}
-		}else {
-			this.workBook.add(toIndex + 1, fromSheet);
-			if(fromIndex < toIndex ) {
-				this.workBook.remove(fromIndex);
-			}else {
-				this.workBook.remove(fromIndex + 1);
-			}
-			
-		}
-		return this.workBook.indexOf(fromSheet);*/
 		SpreadSheet sp = this.moveSheetsInList(fromIndex, toIndex, before);
 		return sp == null ? -1 :this.workBook.indexOf(sp);
 	}
 	
-	//Completed Method
 	public String move(int from, int to, boolean before) {
+	
 		SpreadSheet sp = this.moveSheetsInList(from, to, before);
 		return sp == null ? null : sp.getSpreadSheetName();
 	}
@@ -186,7 +135,7 @@ public class WorkBook {
 	public int moveToEnd(String from) {
 		
 		for(SpreadSheet sheet : this.workBook) {
-			if(sheet.getSpreadSheetName() == from) {
+			if(sheet.getSpreadSheetName().equalsIgnoreCase(from)) {
 				int index = this.workBook.indexOf(sheet);
 				SpreadSheet removedSheet = this.workBook.remove(index);
 				this.workBook.add(removedSheet);
@@ -196,7 +145,6 @@ public class WorkBook {
 		return -1;
 	}
 	
-	//Modified
 	public int rename(String currentName, String newName) {
 		
 		if(!this.getAllSheetNames().contains(currentName)
@@ -204,7 +152,7 @@ public class WorkBook {
 			return -1;
 		
 		for(SpreadSheet sheet : this.workBook) {
-			if(sheet.getSpreadSheetName() == currentName) {
+			if(sheet.getSpreadSheetName().equalsIgnoreCase(currentName)) {
 				sheet.setSpreadSheetName(newName);
 				return this.workBook.indexOf(sheet);
 			}
@@ -223,7 +171,7 @@ public class WorkBook {
 	
 	public int index(String sheetName) {
 		for(SpreadSheet sheet : this.workBook) {
-			if(sheet.getSpreadSheetName() == sheetName) {
+			if(sheet.getSpreadSheetName().equalsIgnoreCase(sheetName)) {
 				return this.workBook.indexOf(sheet);
 			}
 		}
@@ -242,9 +190,6 @@ public class WorkBook {
 	}
 	
 	public void display() {
-		//for(SpreadSheet sheet : this.workBook) {
-			//System.out.println(sheet.getSpreadSheetName());
-		//}
 		String s = "[ ";
 		for(int i = 0; i < this.workBook.size(); i++) {
 			
@@ -262,12 +207,6 @@ public class WorkBook {
 	
 	@Override
 	public String toString() {
-		String s = "";
-		
-		//for(SpreadSheet sheet : this.workBook) {
-			//s+= sheet.getSpreadSheetName()+", ";
-		//}
-		
 		
 		return this.workBook.toString();
 		

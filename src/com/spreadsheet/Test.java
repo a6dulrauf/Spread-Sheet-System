@@ -6,53 +6,46 @@ public class Test {
 
 	public static void main(String[] args) {
 		WorkBook workBook= new WorkBook();
-		//System.out.println(workBook.add(new SpreadSheet("Sheet_1")));
-		
-		//System.out.println(workBook.remove("Sheet_4"));
-		//System.out.println(workBook.remove(2));
-		
-		//System.out.println(workBook.move("Sheet_1", "Sheet_3", true));
-		//System.out.println(workBook.moveToEnd("Sheet_1"));
-		//System.out.println(workBook.rename("Sheet_2","MySheet"));
-		//System.out.println(workBook.index("Sheet_4"));
-		//System.out.println(workBook.sheetName(-1));
-		//System.out.println();
-		//System.out.println(workBook);
-		
-		//SpreadSheet sp1 = new SpreadSheet("Sheet_4");
-		boolean a = workBook.add();
-		workBook.add();
+		//add method
+		System.out.println("Add two new sheets");
+		workBook.add();workBook.add();
 		workBook.display();
-		System.out.println(workBook +" "+a);
-		//for(int i=0;i<256;i++) {
-			//boolean out = workBook.add();
-			//System.out.println(out);
-		//}
-		System.out.println(workBook);
-		//System.out.println(workBook.moveToEnd("Sheet1"));
-		//System.out.println(workBook.rename("Sheet2","Sheet6"));
-		//System.out.println(workBook.remove("Sheet1"));
-		//System.out.println(workBook.sheetName(0));
-		//System.out.println(workBook.index("Sheet1"));
-		//System.out.println(workBook.move("Sheet3", "Sheet1", false));
-		//System.out.println(workBook.move(2, 4, true));
-		int []A = {0,1,2,3,4,5};
-		for (int i : A) {
-			System.out.println(workBook.remove(0));
-		}
-		//System.out.println(workBook.remove(0));//+workBook.remove(1));
-		System.out.println(workBook);
+
+		//Remove Methods
+		System.out.println("Remove Sheet1 than remove 0 index sheet");
+		workBook.remove("Sheet1");
+		workBook.remove(0);
+		workBook.display();
 		
-		System.out.println(workBook.length());
-		System.out.println(workBook);
-		/*
-		List test = new ArrayList<>();
-		test.add("1"+1);
-		int i = test.indexOf("11");
-		System.out.println("Test "+i);
-		*/
-		System.out.println(workBook.index("Sheet"+5));
+		//Move
+		System.out.println("Move from = sheet5 , to = Sheet4 and before = true ");
+		workBook.move("Sheet5", "Sheet4", true);
+		workBook.display();
+		System.out.println("Move from = 0 index , to = 1 index and before = false ");
+		workBook.move(0, 1, false);
+		workBook.display();
 		
+		//Move to End
+		System.out.println("Move 0 index to end");
+		workBook.moveToEnd(0);
+		System.out.println("Move Sheet3 to end");
+		workBook.moveToEnd("Sheet3");
+		workBook.display();
+		
+		//Rename Mehtod
+		System.out.println("Rename Sheet5 to Sheet0");
+		workBook.rename("Sheet5", "Sheet0");
+		
+		//Index Method
+		int index = workBook.index("Sheet4");
+		workBook.display();
+		System.out.println("Index of Sheet4 "+index);
+		
+		//SheetName
+		System.out.println("Sheet Name at index 0 "+workBook.sheetName(0));
+		
+		//Length
+		System.out.println("Length "+workBook.length());
 	}
 
 }
